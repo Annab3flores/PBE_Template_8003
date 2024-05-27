@@ -1,0 +1,36 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block header %}
+<h1>Welcome to the Home Page</h1>
+{% if user.is_authenticated %}
+  <form method="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+{% else %}
+  <div class="area-login">
+    <form method="GET" action="{% url 'login' %}">
+      {% csrf_token %}
+      <button type="submit">Login</button>
+    </form>
+    <form method="GET" action="{% url 'signup' %}">
+      {% csrf_token %}
+      <button type="submit">Signup</button>
+    </form>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<p>Welcome, {{ user.username }}! You have successfully login.</p>
+
+
+{% endblock %}
+
+{% block footer %}
+<p>Copyright © 2024. All rights reserved.</p>
+{% endblock %}

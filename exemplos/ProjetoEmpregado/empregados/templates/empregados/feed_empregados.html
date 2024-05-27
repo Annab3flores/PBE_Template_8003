@@ -1,0 +1,48 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<h1>Lista de Empregados</h1>
+
+<form method="GET" action="">
+    <input type="text" name="search" placeholder="Busque pelo Nome">
+    <select name="cargo">
+        <option value="">Selecion um cargo</option>
+        {% for cargo in cargos %}
+            <option value="{{ cargo }}">{{ cargo }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Filter">
+</form>
+
+<br>
+<div class="container">
+  <table>
+    <tbody>
+        <div class="cards-container">
+            {% for empregado in empregados %}
+            <a href="{% url 'detalhe_empregado' empregado.id %}" style="text-decoration: none; color: inherit;">
+            <div class="card">
+                <p><b>{{ empregado.nome }}</b></p>
+                <p>{{ empregado.cargo }}</p>
+                <!-- Adicione mais detalhes do empregado aqui -->
+            </div>
+            </a>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination code here -->
+{% if empregados.has_previous %}
+<a href="?page=1">Primeiro</a>
+<a href="?page={{ empregados.previous_page_number }}">Anterior</a>
+{% endif %}
+
+<span>Página {{ empregados.number }} de {{ empregados.paginator.num_pages }}</span>
+
+{% if empregados.has_next %}
+<br>
+<a href="?page={{ empregados.next_page_number }}">>></a>
+<a href="?page={{ empregados.paginator.num_pages }}"><<</a>
+{% endif %} {% endblock %}

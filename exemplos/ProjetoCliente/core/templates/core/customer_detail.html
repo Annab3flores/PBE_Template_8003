@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Detail</title>
+</head>
+<body>
+    <h1>{{ customer.name }}</h1>
+    <p>Email: {{ customer.email }}</p>
+    <a href="{% url 'customer-update' customer.id %}">Edit</a> |
+    <a href="{% url 'customer-delete' customer.id %}">Delete</a>
+    <a href="{% url 'views.customer-details' customer.id %}">Details</a>
+    <a href="{% url 'customer-list' %}">Back to Customer List</a>
+</body>
+</html>

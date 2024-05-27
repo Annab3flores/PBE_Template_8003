@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ app_name }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <link rel="stylesheet" href="{% static 'empregados/styles.css' %}" />
+  </head>
+  <body>
+    <header class="header-container">
+      <div class="logo">
+        <!-- Insira o logotipo aqui -->
+      </div>
+
+      <nav>
+        <!-- Insira o menu aqui -->
+        <a href="{% url 'feed_empregados' %}">Home</a>
+        <a href="{% url 'lista_empregados' %}">Empregados</a>
+        <!-- etc. -->
+      </nav>
+
+      <div class="login">
+        <!-- Insira a área de login aqui -->
+        {% if user.is_authenticated %} Olá, {{ user.username }}!
+        <a href="{% url 'lista_empregados' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'lista_empregados' %}">Login</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="container">
+      {% block content %}
+      <!-- O conteúdo específico de cada página será inserido aqui -->
+      {% endblock %}
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>Sobre nós</h4>
+          <p>Algumas informações sobre a empresa.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Contato</h4>
+          <p>Email: exemplo@empresa.com</p>
+          <p>Telefone: (11) 1234-5678</p>
+        </div>
+        <div class="footer-section">
+          <h4>Redes sociais</h4>
+          <p><a href="#">Facebook</a></p>
+          <p><a href="#">Twitter</a></p>
+          <p><a href="#">Instagram</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

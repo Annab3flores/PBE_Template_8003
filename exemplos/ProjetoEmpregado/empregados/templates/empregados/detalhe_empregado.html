@@ -1,0 +1,9 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<h1>{{ empregado.nome }} {{ empregado.sobrenome }}</h1>
+<p>Email: {{ empregado.email }}</p>
+<p>Telefone: {{ empregado.telefone }}</p>
+<p>Cargo: {{ empregado.cargo }}</p>
+<p>Data de Contratação: {{ empregado.data_contratacao }}</p>
+{% endblock %}

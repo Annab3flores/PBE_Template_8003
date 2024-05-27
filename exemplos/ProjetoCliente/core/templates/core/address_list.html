@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Addresses</title>
+</head>
+<body>
+    <h1>Addresses</h1>
+    <a href="{% url 'address-create' %}">Add New Address</a>
+    <ul>
+        {% for address in addresses %}
+            <li>
+                <a href="{% url 'address-detail' address.id %}">{{ address.street }}, {{ address.neighborhood }},{{ address.city }}, {{ address.state }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'index' %}">Home</a>
+</body>
+</html>

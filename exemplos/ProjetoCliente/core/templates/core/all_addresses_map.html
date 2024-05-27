@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Addresses Map</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .form-container, .map-container {
+            flex: 1;
+            margin: 10px;
+        }
+        .map-container {
+            width: 100%;
+            height: 500px;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            vertical-align: top;
+            width: 150px;
+            height: 100px;
+            display: inline-block;
+        }
+        .form-container label, .form-container select, .form-container button {
+            margin: 5px 0;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const stateSelect = document.getElementById('state');
+            const citySelect = document.getElementById('city');
+            const neighborhoodSelect = document.getElementById('neighborhood');
+            
+            const allCities = JSON.parse('{{ cities|safe }}');
+            const allNeighborhoods = JSON.parse('{{ neighborhoods|safe }}');
+
+            stateSelect.addEventListener('change', function() {
+                const selectedState = this.value;
+                citySelect.innerHTML = '<option value="">Select City</option>';
+                neighborhoodSelect.innerHTML = '<option value="">Select Neighborhood</option>';
+                
+                if (selectedState) {
+                    const filteredCities = allCities.filter(city => city[1] === selectedState);
+                    filteredCities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city[0];
+                        option.text = city[0];
+                        citySelect.add(option);
+                    });
+                }
+            });
+
+            citySelect.addEventListener('change', function() {
+                const selectedCity = this.value;
+                const selectedState = stateSelect.value;
+                neighborhoodSelect.innerHTML = '<option value="">Select Neighborhood</option>';
+                
+                if (selectedState && selectedCity) {
+                    const filteredNeighborhoods = allNeighborhoods.filter(neighborhood => neighborhood[1] === selectedState && neighborhood[2] === selectedCity);
+                    filteredNeighborhoods.forEach(neighborhood => {
+                        const option = document.createElement('option');
+                        option.value = neighborhood[0];
+                        option.text = neighborhood[0];
+                        neighborhoodSelect.add(option);
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>All Addresses Map</h1>
+    <div class="container">
+        <div class="form-container">
+
+    <form method="get" action="{% url 'all-addresses-map' %}">
+
+        <label for="state">State:</label>
+        <select id="state" name="state">
+            <option value="">Select State</option>
+            {% for s in states %}
+                <option value="{{ s }}" {% if s == state %}selected{% endif %}>{{ s }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="city">City:</label>
+        <select id="city" name="city">
+            <option value="">Select City</option>
+            {% if state %}
+                {% for c in cities %}
+                    <option value="{{ c }}" {% if c == city %}selected{% endif %}>{{ c }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+
+        <label for="neighborhood">Neighborhood:</label>
+        <select id="neighborhood" name="neighborhood">
+            <option value="">Select Neighborhood</option>
+            {% if state and city %}
+                {% for n in neighborhoods %}
+                    <option value="{{ n }}" {% if n == neighborhood %}selected{% endif %}>{{ n }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+    </div>
+    
+    <div class="map-container">
+        <div id="map">
+            {{ map_html|safe }}
+        </div>
+    </div>
+</div>
+    <a href="{% url 'index' %}">Home</a>
+</body>
+</html>

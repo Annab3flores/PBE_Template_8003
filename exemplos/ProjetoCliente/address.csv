@@ -1,0 +1,7 @@
+id,street,city,state,zip_code,customer_id,latitude,longitude,neighborhood
+1,"Olegário maciel, 100",Rio de Janeiro,Rio de janeiro,20261130,1,-22.9115,-43.1741,Centro
+2,"Presidente Wilson, 118",Rio de Janeiro,Rio de Janeiro,24000000,1,-23.0055,-43.3135,Barra da Tiujca
+3,Rua Centro,São Paulo,São Paulo,24000000,2,-23.014108,-43.3135,Barra
+4,"Alameda Santos, 2356",São Paulo,São Paulo,24000000,2,-23.5574,-46.6623,Cerqueira César
+5,"Rua Rio Grande do Norte, 300",Belo Horizonte,Minas Gerais,30130-130,2,-19.9271,-43.9301,Funcionários
+6,"SIG - Quadra 4 - Edifício Capital Financial Center, St. Sudoeste BL A,",Distrito Federal,Brasília,70610-440,2,-15.7857,-47.9139,Centro

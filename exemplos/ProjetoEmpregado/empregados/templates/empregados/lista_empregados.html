@@ -1,0 +1,68 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+<h1>Lista de Empregados</h1>
+
+<a href="{% url 'criar_empregado' %}">Novo Empregado</a>
+
+<hr>
+<br>
+
+<form method="GET" action="">
+    <input type="text" name="search" placeholder="Busque pelo Nome">
+    <select name="cargo">
+        <option value="">Selecion um cargo</option>
+        {% for cargo in cargos %}
+            <option value="{{ cargo }}">{{ cargo }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Filter">
+</form>
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th><a href="?sort_by=nome">Nome</a></th>
+        <th><a href="?sort_by=sobrenome">Sobrenome</a></th>
+        <th>Email</th>
+        <th>Telefone</th>
+        <th>Cargo</th>
+        <th>Data de Contratação</th>
+        <th>Operações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for empregado in empregados %}
+      <tr>
+        <td>{{ empregado.nome }}</td>
+        <td>{{ empregado.sobrenome }}</td>
+        <td>{{ empregado.email }}</td>
+        <td>{{ empregado.telefone }}</td>
+        <td>{{ empregado.cargo }}</td>
+        <td>{{ empregado.data_contratacao }}</td>
+        <td>
+          <a href="{% url 'editar_empregado' empregado.id %}">Editar</a> |
+          <a href="{% url 'deletar_empregado' empregado.id %}">Deletar</a> |
+          <a href="{% url 'detalhe_empregado' empregado.id %}">Detalhes</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination code here -->
+{% if empregados.has_previous %}
+<a href="?page=1">Primeiro</a>
+<a href="?page={{ empregados.previous_page_number }}">Anterior</a>
+{% endif %}
+
+<span>Página {{ empregados.number }} de {{ empregados.paginator.num_pages }}</span>
+
+{% if empregados.has_next %}
+<br>
+<a href="?page={{ empregados.next_page_number }}">>></a>
+<a href="?page={{ empregados.paginator.num_pages }}"><<</a>
+{% endif %} {% endblock %}

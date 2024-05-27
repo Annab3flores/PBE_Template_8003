@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Details</title>
+</head>
+<body>
+    <h1>Customer: {{ customer.name }}</h1>
+    <h2>Addresses:</h2>
+    <ul>
+        {% for address in customer.addresses.all %}
+            <li>
+                <strong>Street:</strong> {{ address.street }}<br>
+                <strong>Neighborhood:</strong> {{ address.neighborhood }}<br>
+                <strong>City:</strong> {{ address.city }}<br>
+                <strong>State:</strong> {{ address.state }}<br>
+                <strong>Zip Code:</strong> {{ address.zip_code }}<br>
+                <strong>Latitude:</strong> {{ address.latitude }}<br>
+                <strong>Longitude:</strong> {{ address.longitude }}<br>
+            </li>
+        {% empty %}
+            <li>No addresses found for this customer.</li>
+        {% endfor %}
+    </ul>
+    <h2>Orders:</h2>
+    <ul>
+        {% for order in customer.orders.all %}
+            <li>
+                <strong>Order ID:</strong> {{ order.id }}<br>
+                <strong>Order Date:</strong> {{ order.order_date }}<br>
+                <strong>Total Amount:</strong> ${{ order.total_amount }}<br>
+            </li>
+        {% empty %}
+            <li>No orders found for this customer.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'customer-list' %}">Back to Customer List</a>
+</body>
+</html>

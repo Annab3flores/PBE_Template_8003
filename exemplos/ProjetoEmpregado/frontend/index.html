@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empregados</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Lista de Empregados</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Empregados</h2>
+        <ul id="empregados-lista"></ul>
+      </section>
+      <section>
+        <form id="empregado-form">
+          <h2 id="form-title">Adicionar Empregado</h2>
+          <input type="hidden" id="empregado-id" />
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required />
+          <label for="sobrenome">Sobrenome:</label>
+          <input type="text" id="sobrenome" name="sobrenome" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <label for="telefone">Telefone:</label>
+          <input type="text" id="telefone" name="telefone" required />
+          <label for="cargo">Cargo:</label>
+          <input type="text" id="cargo" name="cargo" required />
+          <label for="data_contratacao">Data de Contratação:</label>
+          <input
+            type="date"
+            id="data_contratacao"
+            name="data_contratacao"
+            required
+          />
+          <button type="submit" id="submit-button">Adicionar</button>
+          <button type="button" id="cancel-button" style="display: none">
+            Cancelar
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
